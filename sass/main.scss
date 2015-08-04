@@ -32,7 +32,7 @@ h1 {
 
 // Moving box
 
-#post2 {
+.box-post {
   position:relative;
   height:175px;
 }
@@ -42,7 +42,7 @@ h1 {
   background-color: $green;
 }
 
-#box1 {
+#box1, #box2 {
   position:absolute;
   left:20px;
 }

@@ -23,7 +23,7 @@ h1 {
   #b1.resistance {
     background-color: #00abed; }
 
-#post2 {
+.box-post {
   position: relative;
   height: 175px; }
 
@@ -32,7 +32,7 @@ h1 {
   height: 100px;
   background-color: #00c038; }
 
-#box1 {
+#box1, #box2 {
   position: absolute;
   left: 20px; }
 
