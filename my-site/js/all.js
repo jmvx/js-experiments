@@ -60,6 +60,23 @@ document.addEventListener("DOMContentLoaded", function(event) {
     button.form.reset();
   }
   
+  function slideBoxNew(event) {
+    var startTime = performance.now();
+    var box = event.target;
+    function step(timestamp) {
+      var progress = timestamp - startTime;
+      var currentPosition = box.offsetLeft;
+      var newPosition = currentPosition + 100;
+      box.style.left = newPosition + 'px';
+      if (newPosition < window.innerWidth-100) {
+        window.requestAnimationFrame(step); // loops back to beginning
+      } else {
+        box.style.left = "20px";
+      }
+    }
+    window.requestAnimationFrame(step);
+  }
+  
   // Button Change
   document.getElementById("b1").onclick = changeButton;
   // Move Box
@@ -68,6 +85,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
   document.getElementById("box2").onclick = slideBox;
   // To-Do List
   document.getElementById("b2").onclick = submitToDo;
+  // New Slide Box
+  document.getElementById("box3").onclick = slideBoxNew;
   
 });
 

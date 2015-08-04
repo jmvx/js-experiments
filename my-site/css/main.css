@@ -33,7 +33,7 @@ h1 {
   height: 100px;
   background-color: #00c038; }
 
-#box1, #box2 {
+#box1, #box2, #box3 {
   position: absolute;
   left: 20px; }
 
