@@ -1,8 +1,9 @@
 document.addEventListener("DOMContentLoaded", function(event) {
   
   // Changes button from Enlightened Green to Resistance Blue on click
-  function changeButton() {
-    var button = document.getElementById("b1");
+  function changeButton(event) {
+    console.log(event.type)
+    var button = event.target;
     if (button.className == "enlightened") {
       button.className = "resistance";
       button.value = "Resistance"
@@ -13,8 +14,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
   }
   
   // Move box on click
-  function moveBox() {
-    var box = document.getElementById("box1");
+  function moveBox(event) {
+    var box = event.target;
     var currentPosition = box.offsetLeft;
     var newPosition = currentPosition + 100;
     if (newPosition > window.innerWidth-100) {
@@ -25,12 +26,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
   }
   
   // Slide box (smoothly) on click
-  // NOTE: Request Animation Frame
-  function slideBox() {
+  // NOTE: Request Animation Frame?
+  function slideBox(event) {
     // slide box 1px every 1 ms
     var interval = setInterval(function() {
-      console.log("slideBox")
-      var box = document.getElementById("box2");
+      var box = event.target;
       var currentPosition = box.offsetLeft;
       var newPosition = currentPosition + 1;
       console.log(newPosition)
@@ -43,8 +43,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }, 1);
   }
   
-  function submitToDo() {
-    var button = document.getElementById("b2");
+  function submitToDo(event) {
+    var button = event.target;
     todo = button.form.content.value;
     if (todo != "") {
       // create new list item
@@ -61,13 +61,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
   }
   
   // Button Change
-  document.getElementById("b1").addEventListener("click", changeButton, false);
+  document.getElementById("b1").onclick = changeButton;
   // Move Box
-  document.getElementById("box1").addEventListener("click", moveBox, false);
+  document.getElementById("box1").onclick = moveBox;
   // Slide Box
-  document.getElementById("box2").addEventListener("click", slideBox, false);
+  document.getElementById("box2").onclick = slideBox;
   // To-Do List
-  document.getElementById("b2").addEventListener("click", submitToDo, false);
+  document.getElementById("b2").onclick = submitToDo;
   
 });
 
