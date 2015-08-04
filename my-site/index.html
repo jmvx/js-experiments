@@ -10,10 +10,13 @@
 <body>
   
   <h1>My JavaScript Experiments</h1>
+  
   <div class="post">
     <h2>The color-changing button</h2>
     <p>Click the button</p>
-    <input type="button" class="enlightened" id="b1" value="Enlightened"></input>
+    <form>
+      <input type="button" class="enlightened" id="b1" value="Enlightened"></input>
+    </form>
   </div>
   
   <div class="post box-post">
@@ -26,6 +29,17 @@
     <h2>The smooth moving box</h2>
     <p>Click the box</p>
     <div id="box2" class="box"></div>
+  </div>
+  
+  <div class="post">
+    <h2>The to-do list</h2>
+    <p>Add something to the to-do list</p>
+    <form>
+      <input type="text" id="t1" name="content"></input>
+      <input type="button" id="b2" value="Add to list"></input>
+    </form>
+    <ul id="to-do-list">
+    </ul>
   </div>
   
 </body>

@@ -46,3 +46,18 @@ h1 {
   position:absolute;
   left:20px;
 }
+
+// to-do list
+
+ul#to-do-list {
+  margin-top:20px;
+}
+
+li.to-do {
+  list-style-type:none;
+  padding-bottom:10px;
+  &:before {
+    content: '✔';
+    margin-right:10px;
+  }
+}
