@@ -68,9 +68,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
       var newPosition = progress/10;
       box.style.left = newPosition + 'px';
       if (newPosition < window.innerWidth-100) {
-        window.requestAnimationFrame(step); // loops back to beginning
+        window.requestAnimationFrame(step);
       } else {
-        box.style.left = "20px";
+        box.style.left = "20px"; // loops back to beginning
       }
     }
     window.requestAnimationFrame(step);
