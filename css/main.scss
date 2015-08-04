@@ -21,6 +21,7 @@ h1 {
 // Color changing button
 
 #b1 {
+  color: white;
   &.enlightened {
     background-color:$green;
   }
@@ -32,5 +33,6 @@ h1 {
 // Moving box
 
 .box {
-
+  width: 100px; height: 100px;
+  background-color: $green;
 }

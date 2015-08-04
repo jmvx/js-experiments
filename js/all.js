@@ -6,8 +6,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
     var b = document.querySelector("#b1");
     if (b.className == "enlightened") {
       b.className = "resistance";
+      b.value = "Resistance"
     } else {
       b.className = "enlightened";
+      b.value = "Enlightened"
     }
   }
   
