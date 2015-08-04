@@ -65,8 +65,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     var box = event.target;
     function step(timestamp) {
       var progress = timestamp - startTime;
-      var currentPosition = box.offsetLeft;
-      var newPosition = currentPosition + 100;
+      var newPosition = progress/10;
       box.style.left = newPosition + 'px';
       if (newPosition < window.innerWidth-100) {
         window.requestAnimationFrame(step); // loops back to beginning
