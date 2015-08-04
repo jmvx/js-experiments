@@ -1,19 +1,34 @@
 document.addEventListener("DOMContentLoaded", function(event) {
-  document.querySelector("#b1").className = "enlightened";
   
   // Changes button from Enlightened Green to Resistance Blue on click
   function changeButton() {
-    var b = document.querySelector("#b1");
-    if (b.className == "enlightened") {
-      b.className = "resistance";
-      b.value = "Resistance"
+    console.log("changeButton");
+    var button = document.getElementById("b1");
+    if (button.className == "enlightened") {
+      button.className = "resistance";
+      button.value = "Resistance"
     } else {
-      b.className = "enlightened";
-      b.value = "Enlightened"
+      button.className = "enlightened";
+      button.value = "Enlightened"
     }
   }
   
-  // Event listener for button change
-  document.querySelector("#b1").addEventListener("click", changeButton, false)
+  // Move box on click
+  function moveBox() {
+    console.log("moveBox");
+    var box = document.getElementById("box1");
+    var currentPosition = box.offsetLeft;
+    var newPosition = currentPosition + 100;
+    if (newPosition > window.innerWidth-100) {
+      box.style.left = "20px";
+    } else {
+      box.style.left = newPosition + 'px'; // loops back to beginning
+    }
+  }
+  
+  // Button Change
+  document.getElementById("b1").addEventListener("click", changeButton, false)
+  // Move Box
+  document.getElementById("box1").addEventListener("click", moveBox, false)
 });
 

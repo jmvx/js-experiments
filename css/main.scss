@@ -32,7 +32,17 @@ h1 {
 
 // Moving box
 
+#post2 {
+  position:relative;
+  height:175px;
+}
+
 .box {
   width: 100px; height: 100px;
   background-color: $green;
+}
+
+#box1 {
+  position:absolute;
+  left:20px;
 }

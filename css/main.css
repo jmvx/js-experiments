@@ -23,9 +23,17 @@ h1 {
   #b1.resistance {
     background-color: #00abed; }
 
+#post2 {
+  position: relative;
+  height: 175px; }
+
 .box {
   width: 100px;
   height: 100px;
   background-color: #00c038; }
+
+#box1 {
+  position: absolute;
+  left: 20px; }
 
 /*# sourceMappingURL=main.css.map */
