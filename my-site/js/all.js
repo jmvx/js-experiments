@@ -26,7 +26,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
   }
   
   // Slide box (smoothly) on click
-  // NOTE: Request Animation Frame?
   function slideBox(event) {
     // slide box 1px every 1 ms
     var interval = setInterval(function() {
@@ -61,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   }
   
   function slideBoxNew(event) {
-    var startTime = performance.now();
+    var startTime = performance.now(); // FIX: ReferenceError: Can't find variable: performance when on iPhone?
     var box = event.target;
     function step(timestamp) {
       var progress = timestamp - startTime;
@@ -86,6 +85,5 @@ document.addEventListener("DOMContentLoaded", function(event) {
   document.getElementById("b2").onclick = submitToDo;
   // New Slide Box
   document.getElementById("box3").onclick = slideBoxNew;
-  
 });
 
