@@ -1,0 +1,26 @@
+@import "colors";
+@import "reset";
+
+body {
+  padding:10px;
+}
+
+.post {
+  border:1px solid $lightgray;
+  padding: 0px 20px 20px 20px;
+  border-radius:5px;
+}
+
+h1 {
+  color: $lightpurple;
+  border-bottom: 1px solid $lightgray;
+  padding-bottom:10px;
+}
+
+#b1.enlightened {
+  background-color:$green;
+}
+
+#b1.resistance {
+  background-color:$blue;
+}
