@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     var box = event.target;
     var currentPosition = box.offsetLeft;
     var newPosition = currentPosition + 100;
-    if (newPosition > window.innerWidth-100) {
+    if (newPosition > window.innerWidth - 100) {
       box.style.left = "20px"; // loops back to beginning
     } else {
       box.style.left = newPosition + 'px';
@@ -33,13 +33,20 @@ document.addEventListener("DOMContentLoaded", function(event) {
       var currentPosition = box.offsetLeft;
       var newPosition = currentPosition + 1;
       console.log(newPosition)
-      if (newPosition > window.innerWidth-100) {
+      if (newPosition > window.innerWidth - 100) {
         box.style.left = "20px"; // loops back to beginning
         clearInterval(interval);
       } else {
         box.style.left = newPosition + 'px';
       }
     }, 1);
+
+    // You should know that setInterval/setTimeout are throttled,
+    // and to different thresholds in different browsers, so this
+    // is not really safe (the speed of the box animation depends on
+    // the speed of the throttled timer).
+    // In this case, you are definitely *not* going to get a 1ms
+    // interval. See http://www.belshe.com/test/timers.html for more.
   }
   
   function submitToDo(event) {
@@ -60,13 +67,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
   }
   
   function slideBoxNew(event) {
-    var startTime = performance.now(); // FIX: ReferenceError: Can't find variable: performance when on iPhone?
+    var startTime = undefined;
     var box = event.target;
+    var startPosition = box.offsetLeft;
+
     function step(timestamp) {
+      if (!startTime)
+        startTime = timestamp;
       var progress = timestamp - startTime;
-      var newPosition = progress/10;
+      var newPosition = startPosition + progress / 10;
       box.style.left = newPosition + 'px';
-      if (newPosition < window.innerWidth-100) {
+      if (newPosition < window.innerWidth - 100) {
         window.requestAnimationFrame(step);
       } else {
         box.style.left = "20px"; // loops back to beginning
