@@ -1,5 +1,30 @@
 document.addEventListener("DOMContentLoaded", function(event) {
   
+  // Returns true if object is in the Array
+  Array.prototype.contains = function(obj) {
+    var len = this.length;
+    var i;
+    for (i = 0; i < len; i++) {
+      if (this[i] == obj) {
+        return true;
+      }
+    } return false;
+  };
+  
+  // converts month portion of date to string name
+  Date.prototype.getMonthName = function() {
+    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    var index = this.getMonth();
+    return months[index];
+  };
+  
+  // converts month portion of date to string name
+  Date.prototype.getDayName = function() {
+    var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    var index = this.getDay();
+    return days[index];
+  };
+  
   // Changes button from Enlightened Green to Resistance Blue on click
   function changeButton(event) {
     console.log(event.type)
@@ -120,6 +145,58 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
   }
 
+  var f = function calendar() {
+    // get today's date to title calendar
+    var today = new Date();
+    var month = today.getMonthName();
+    var day = today.getDate();
+    var year = today.getFullYear();
+    var weekday = today.getDayName();
+    var todaysDate = weekday + " " + month + " " + day + ", " + year;
+    var calDiv = document.getElementById("post7");
+    var calTitleDiv = document.createElement("h2");
+    var calSubtitleDiv = document.createElement("h3");
+    var subtitleContent = document.createTextNode(month);
+    var titleContent = document.createTextNode(todaysDate);
+    calTitleDiv.appendChild(titleContent);
+    calSubtitleDiv.appendChild(subtitleContent);
+    calDiv.appendChild(calTitleDiv);
+    calDiv.appendChild(calSubtitleDiv);
+    // get first date of the month to start calendar numbering
+    var g = function makeGrid() {
+      var calendar = document.createElement("div");
+      calendar.className = "calendar";
+      var grid = calDiv.appendChild(calendar);
+      var cellId = 0
+      for (var j = 0; j < 6; j++) {
+        var row = document.createElement("div");
+        row.className = "row";
+        for(var i = 0; i < 7; i++) {
+          var cell = document.createElement("div");
+          cell.className = "cell";
+          cell.id = cellId;
+          cellId += 1;
+          row.appendChild(cell);
+        } grid.appendChild(row);
+      }
+    }();
+    var h = function fillGrid() {
+      var firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+      var lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+      var date = 1;
+      for (var i = firstDay.getDay(); i < 42; i++) {
+        var c = document.getElementById(i);
+        if (date == day) { c.classList.add("today"); }
+        var stuff = document.createTextNode(date)
+        c.appendChild(stuff)
+        date = date+1;
+        if (date > lastDay.getDate()) {
+          break;
+        }
+      }
+    }();
+  }();
+
   // Button Change
   document.getElementById("b1").onclick = changeButton;
   // Move Box
@@ -131,24 +208,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
   // New Slide Box
   document.getElementById("box3").onclick = slideBoxNew;
   // Swappable box
-  divs = document.getElementsByClassName("swapable");
+  var divs = document.getElementsByClassName("swapable");
   // assign swapBox event handler
-  var i = 0
-  for (i = 0; i < divs.length; i++) {
+  for (var i = 0; i < divs.length; i++) {
     divs[i].onclick = swapBox;
   }
-  
-  // Returns true if object is in the Array
-  Array.prototype.contains = function(obj) {
-    var len = this.length;
-    var i;
-    for (i = 0; i < len; i++) {
-      if (this[i] == obj) {
-        return true;
-      }
-    } return false;
-  }
-  
-  
 });
 

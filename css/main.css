@@ -42,9 +42,10 @@ h1 {
   left: 20px; }
 
 .swapable {
-  padding: 2px;
+  padding-top: 5px;
   text-align: center;
-  font-size: 62pt; }
+  font-size: 62pt;
+  height: 95px; }
 
 ul#to-do-list {
   margin-top: 20px; }
@@ -55,5 +56,20 @@ li.to-do {
   li.to-do:before {
     content: '✔';
     margin-right: 10px; }
+
+.calendar {
+  width: 300px; }
+
+.cell {
+  vertical-align: top;
+  min-width: 30px;
+  min-height: 30px;
+  padding: 5px;
+  display: inline-block;
+  border: 1px solid gray; }
+
+.today {
+  color: red;
+  background-color: #e4e4e4; }
 
 /*# sourceMappingURL=main.css.map */
