@@ -69,7 +69,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
     var startTime = undefined;
     var box = event.target;
     var startPosition = box.offsetLeft;
-
     function step(timestamp) {
       if (!startTime)
         startTime = timestamp;
@@ -115,9 +114,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
       sibDiv = parentDiv.replaceChild(copyChild,sibDiv);
       // swap is finished, clear the swapped boxes array
       swap_me = [];
-      // When I cloned the nodes, apparently I lost the event handlers too...
-      // Reassign event handlers...???
-      // Any better ways to do this?
+      // Reassign event handlers to new divs
       copySib.onclick = swapBox;
       copyChild.onclick = swapBox;
     }
@@ -135,14 +132,13 @@ document.addEventListener("DOMContentLoaded", function(event) {
   document.getElementById("box3").onclick = slideBoxNew;
   // Swappable box
   divs = document.getElementsByClassName("swapable");
-  // Is this the best or only way to add an event handler to multiple divs?
+  // assign swapBox event handler
   var i = 0
   for (i = 0; i < divs.length; i++) {
     divs[i].onclick = swapBox;
   }
   
-  // Prototype method stuff
-  
+  // Returns true if object is in the Array
   Array.prototype.contains = function(obj) {
     var len = this.length;
     var i;
