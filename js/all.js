@@ -135,6 +135,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   document.getElementById("box3").onclick = slideBoxNew;
   // Swappable box
   divs = document.getElementsByClassName("swapable");
+  // Is this the best or only way to add an event handler to multiple divs?
   var i = 0
   for (i = 0; i < divs.length; i++) {
     divs[i].onclick = swapBox;
