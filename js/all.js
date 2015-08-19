@@ -1,19 +1,5 @@
 document.addEventListener("DOMContentLoaded", function(event) {
-  
-  // converts month portion of date to string name
-  Date.prototype.JMVgetMonthName = function() {
-    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-    var index = this.getMonth();
-    return months[index];
-  };
-  
-  // converts month portion of date to string name
-  Date.prototype.JMVgetDayName = function() {
-    var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    var index = this.getDay();
-    return days[index];
-  };
-  
+
   // Changes button from Enlightened Green to Resistance Blue on click
   function changeButton(event) {
     console.log(event.type)
@@ -26,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
       button.value = "Enlightened"
     }
   }
-  
+
   // Move box on click
   function moveBox(event) {
     var box = event.target;
@@ -37,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
     box.style.left = newPosition + 'px';
   }
-  
+
   // Slide box (smoothly) on click
   function slideBox(event) {
     // slide box 1px every 1 ms
@@ -61,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     // In this case, you are definitely *not* going to get a 1ms
     // interval. See http://www.belshe.com/test/timers.html for more.
   }
-  
+
   function submitToDo(event) {
     var button = event.target;
     todo = button.form.content.value;
@@ -78,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     }
     button.form.reset();
   }
-  
+
   function slideBoxNew(event) {
     var startTime = undefined;
     var box = event.target;
@@ -135,22 +121,47 @@ document.addEventListener("DOMContentLoaded", function(event) {
   }
 
   var f = function calendar() {
-    // get today's date to title calendar
-    var today = new Date();
-    var month = today.JMVgetMonthName();
-    var day = today.getDate();
-    var year = today.getFullYear();
-    var weekday = today.JMVgetDayName();
-    var todaysDate = weekday + " " + month + " " + day + ", " + year;
+    // Gets today's date and has additional methods
+    // for converting dates to string names
+    var TodaysDate = function() {
+      date = new Date()
+      this.month = date.getMonth();
+      this.day = date.getDate();
+      this.year = date.getFullYear();
+      this.weekday = date.getDay();
+      this.monthName = getMonthName();
+      this.weekdayName = getDayName();
+      function getDayName() {
+        var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+        var index = date.getDay();
+        return days[index];
+      };
+      function getMonthName() {
+        var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        var index = date.getMonth();
+        return months[index];
+      };
+    };
+
+    // Format date content
+    var today = new TodaysDate();
+    var month = today.monthName;
+    var day = today.day;
+    var year = today.year;
+    var weekday = today.weekdayName;
+    var todayLong = weekday + " " + month + " " + day + ", " + year;
     var calDiv = document.getElementById("post7");
     var calTitleDiv = document.createElement("h2");
     var calSubtitleDiv = document.createElement("h3");
     var subtitleContent = document.createTextNode(month);
-    var titleContent = document.createTextNode(todaysDate);
+    var titleContent = document.createTextNode(todayLong);
+
+    // append calendar title divs
     calTitleDiv.appendChild(titleContent);
     calSubtitleDiv.appendChild(subtitleContent);
     calDiv.appendChild(calTitleDiv);
     calDiv.appendChild(calSubtitleDiv);
+
     // get first date of the month to start calendar numbering
     var g = function makeGrid() {
       var calendar = document.createElement("div");
@@ -169,17 +180,19 @@ document.addEventListener("DOMContentLoaded", function(event) {
         } grid.appendChild(row);
       }
     }();
+
+    // Fill calendar grid with dates in appropriate cells
     var h = function fillGrid() {
-      var firstDay = new Date(today.getFullYear(), today.getMonth(), 1);
-      var lastDay = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+      var firstDay = new Date(today.year, today.month, 1).getDay();
+      var lastDay = new Date(today.year, today.month + 1, 0).getDate();
       var date = 1;
-      for (var i = firstDay.getDay(); i < 42; i++) {
+      for (var i = firstDay; i < 42; i++) {
         var c = document.getElementById(i);
         if (date == day) { c.classList.add("today"); }
         var stuff = document.createTextNode(date)
         c.appendChild(stuff)
-        date = date+1;
-        if (date > lastDay.getDate()) {
+        date = date + 1;
+        if (date > lastDay) {
           break;
         }
       }
