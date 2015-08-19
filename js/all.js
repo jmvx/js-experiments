@@ -123,33 +123,31 @@ document.addEventListener("DOMContentLoaded", function(event) {
   var f = function calendar() {
     // Gets today's date and has additional methods
     // for converting dates to string names
-    var TodaysDate = function() {
+    function TodaysDate() {
       date = new Date()
       this.month = date.getMonth();
       this.day = date.getDate();
       this.year = date.getFullYear();
       this.weekday = date.getDay();
-      this.monthName = getMonthName();
-      this.weekdayName = getDayName();
-      function getDayName() {
-        var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-        var index = date.getDay();
-        return days[index];
-      };
-      function getMonthName() {
-        var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        var index = date.getMonth();
-        return months[index];
-      };
+    };
+    TodaysDate.prototype.weekdayName = function () {
+      var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      var index = this.weekday; // instead of date.getDay()
+      return days[index];
+    };
+    TodaysDate.prototype.monthName = function () {
+      var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      var index = this.month;  // instead of date.getMonth()
+      return months[index];
     };
 
     // Format date content
     var today = new TodaysDate();
-    var month = today.monthName;
+    var month = today.monthName();
     var day = today.day;
     var year = today.year;
-    var weekday = today.weekdayName;
-    var todayLong = weekday + " " + month + " " + day + ", " + year;
+    var wday = today.weekdayName();
+    var todayLong = wday + " " + month + " " + day + ", " + year;
     var calDiv = document.getElementById("post7");
     var calTitleDiv = document.createElement("h2");
     var calSubtitleDiv = document.createElement("h3");
