@@ -1,25 +1,14 @@
 document.addEventListener("DOMContentLoaded", function(event) {
   
-  // Returns true if object is in the Array
-  Array.prototype.contains = function(obj) {
-    var len = this.length;
-    var i;
-    for (i = 0; i < len; i++) {
-      if (this[i] == obj) {
-        return true;
-      }
-    } return false;
-  };
-  
   // converts month portion of date to string name
-  Date.prototype.getMonthName = function() {
+  Date.prototype.JMVgetMonthName = function() {
     var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     var index = this.getMonth();
     return months[index];
   };
   
   // converts month portion of date to string name
-  Date.prototype.getDayName = function() {
+  Date.prototype.JMVgetDayName = function() {
     var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     var index = this.getDay();
     return days[index];
@@ -148,10 +137,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
   var f = function calendar() {
     // get today's date to title calendar
     var today = new Date();
-    var month = today.getMonthName();
+    var month = today.JMVgetMonthName();
     var day = today.getDate();
     var year = today.getFullYear();
-    var weekday = today.getDayName();
+    var weekday = today.JMVgetDayName();
     var todaysDate = weekday + " " + month + " " + day + ", " + year;
     var calDiv = document.getElementById("post7");
     var calTitleDiv = document.createElement("h2");
