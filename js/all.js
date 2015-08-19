@@ -86,6 +86,45 @@ document.addEventListener("DOMContentLoaded", function(event) {
     window.requestAnimationFrame(step);
   }
   
+  var swapped_boxes = [];
+  function swapBox(event) {
+    var box = event.target;
+    if (swapped_boxes.length < 2) {
+      // if two boxes haven't been selected, add box to set and change it blue
+      box.classList.add("swap");
+      swapped_boxes.push(box)
+      if (swapped_boxes.length == 2) {
+        // if adding the box makes a complete set, swap the HTML contents
+        swapHTML(swapped_boxes);
+      }
+    } else if (swapped_boxes.length == 2 && swapped_boxes.contains(box) == true) {
+      // if there is already a complete set and a box in the set is re-clicked
+      // just swap the HTML contents
+      swapHTML(swapped_boxes);
+      if (box == swapped_boxes[0]) {
+        // if the reclicked box was the oldest box, make it the newest box
+        swapped_boxes = swapped_boxes.reverse();
+      }
+    } else if (swapped_boxes.length == 2 && swapped_boxes.contains(box) == false){
+      // if there is already a complete set and a third new box is clicked
+      // remove the oldest box from the set
+      // add the new box to the set
+      // swap the content of the boxes
+      swapped_boxes[0].classList.remove("swap");
+      swapped_boxes.shift();
+      box.classList.add("swap");
+      swapped_boxes.push(box);
+      swapHTML(swapped_boxes);
+    }
+    // swapps innerHTML for two divs
+    function swapHTML(ary) {
+      var temp = ary[0].innerHTML;
+      ary[0].innerHTML = ary[1].innerHTML;
+      ary[1].innerHTML = temp;
+      return ary;
+    }
+  }
+  
   // Button Change
   document.getElementById("b1").onclick = changeButton;
   // Move Box
@@ -96,5 +135,25 @@ document.addEventListener("DOMContentLoaded", function(event) {
   document.getElementById("b2").onclick = submitToDo;
   // New Slide Box
   document.getElementById("box3").onclick = slideBoxNew;
+  // Swappable box
+  divs = document.getElementsByClassName("swapable")
+  var i = 0
+  for (i = 0; i < divs.length; i++) {
+    divs[i].onclick = swapBox;
+  }
+  
+  // Prototype method stuff
+  
+  Array.prototype.contains = function(obj) {
+    var len = this.length;
+    var i;
+    for (i = 0; i < len; i++) {
+      if (this[i] == obj) {
+        return true;
+      }
+    } return false;
+  }
+  
+  
 });
 

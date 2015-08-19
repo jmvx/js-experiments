@@ -31,11 +31,20 @@ h1 {
 .box {
   width: 100px;
   height: 100px;
-  background-color: #00c038; }
+  background-color: #00c038;
+  display: inline-block; }
+
+.swap {
+  background-color: #00abed; }
 
 #box1, #box2, #box3 {
   position: absolute;
   left: 20px; }
+
+.swapable {
+  padding: 2px;
+  text-align: center;
+  font-size: 62pt; }
 
 ul#to-do-list {
   margin-top: 20px; }
