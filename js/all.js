@@ -86,42 +86,41 @@ document.addEventListener("DOMContentLoaded", function(event) {
     window.requestAnimationFrame(step);
   }
   
-  var swapped_boxes = [];
+  var swap_me = [];
   function swapBox(event) {
     var box = event.target;
-    if (swapped_boxes.length < 2) {
+    if (swap_me.length < 2) {
       // if two boxes haven't been selected, add box to set and change it blue
       box.classList.add("swap");
-      swapped_boxes.push(box)
-      if (swapped_boxes.length == 2) {
-        // if adding the box makes a complete set, swap the HTML contents
-        swapHTML(swapped_boxes);
-      }
-    } else if (swapped_boxes.length == 2 && swapped_boxes.contains(box) == true) {
-      // if there is already a complete set and a box in the set is re-clicked
-      // just swap the HTML contents
-      swapHTML(swapped_boxes);
-      if (box == swapped_boxes[0]) {
-        // if the reclicked box was the oldest box, make it the newest box
-        swapped_boxes = swapped_boxes.reverse();
-      }
-    } else if (swapped_boxes.length == 2 && swapped_boxes.contains(box) == false){
-      // if there is already a complete set and a third new box is clicked
-      // remove the oldest box from the set
-      // add the new box to the set
-      // swap the content of the boxes
-      swapped_boxes[0].classList.remove("swap");
-      swapped_boxes.shift();
-      box.classList.add("swap");
-      swapped_boxes.push(box);
-      swapHTML(swapped_boxes);
+      swap_me.push(box)
+    } 
+    if (swap_me.length == 2) {
+      // if two boxes have been selected, swap
+      swapDivs();
     }
-    // swapps innerHTML for two divs
-    function swapHTML(ary) {
-      var temp = ary[0].innerHTML;
-      ary[0].innerHTML = ary[1].innerHTML;
-      ary[1].innerHTML = temp;
-      return ary;
+    // swaps two divs
+    function swapDivs() {
+      var parentDiv = document.getElementById(swap_me[0].id).parentNode;
+      var childDiv = document.getElementById(swap_me[0].id);
+      var sibDiv = document.getElementById(swap_me[1].id);
+      // Remove the blue "swap" class so it's not also cloned
+      childDiv.classList.remove("swap");
+      sibDiv.classList.remove("swap");
+      // Make copies of the original divs to replace old divs
+      var copyChild = childDiv.cloneNode(true);
+      var copySib = sibDiv.cloneNode(true);
+      childDiv = parentDiv.replaceChild(copySib,childDiv);
+      sibDiv = parentDiv.replaceChild(copyChild,sibDiv);
+      // swap is finished, clear the swapped boxes array
+      swap_me = [];
+      // When I cloned the nodes, apparently I lost the event handlers too...
+      // Reassign event handlers...
+      // Any better ways to do this? This doesn't seem like a good thing.
+      divs = document.getElementsByClassName("swapable");
+      var i = 0
+      for (i = 0; i < divs.length; i++) {
+        divs[i].onclick = swapBox;
+      }
     }
   }
   
@@ -136,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
   // New Slide Box
   document.getElementById("box3").onclick = slideBoxNew;
   // Swappable box
-  divs = document.getElementsByClassName("swapable")
+  divs = document.getElementsByClassName("swapable");
   var i = 0
   for (i = 0; i < divs.length; i++) {
     divs[i].onclick = swapBox;
