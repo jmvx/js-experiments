@@ -130,24 +130,30 @@ document.addEventListener("DOMContentLoaded", function(event) {
       this.year = date.getFullYear();
       this.weekday = date.getDay();
     };
-    TodaysDate.prototype.weekdayName = function () {
-      var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-      var index = this.weekday; // instead of date.getDay()
-      return days[index];
-    };
-    TodaysDate.prototype.monthName = function () {
-      var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-      var index = this.month;  // instead of date.getMonth()
-      return months[index];
-    };
+    // Adding methods for converting days and months to full strings
+    TodaysDate.prototype = {
+      weekdayName: function () {
+        var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 
+                    'Friday', 'Saturday'];
+        var index = this.weekday;
+        return days[index];
+      },
+      monthName: function () {
+        var months = ['January', 'February', 'March', 'April', 'May', 
+                      'June', 'July', 'August', 'September', 'October', 
+                      'November', 'December'];
+        var index = this.month;
+        return months[index];
+      }
+    }
 
     // Format date content
     var today = new TodaysDate();
     var month = today.monthName();
     var day = today.day;
     var year = today.year;
-    var wday = today.weekdayName();
-    var todayLong = wday + " " + month + " " + day + ", " + year;
+    var weekday = today.weekdayName();
+    var todayLong = weekday + " " + month + " " + day + ", " + year;
     var calDiv = document.getElementById("post7");
     var calTitleDiv = document.createElement("h2");
     var calSubtitleDiv = document.createElement("h3");
